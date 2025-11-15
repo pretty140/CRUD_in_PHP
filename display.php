@@ -3,31 +3,36 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>display</title>
 </head>
 <body>
-	<table bgcolor="skyblue" border="2">
+	<button><a href="logout.php">logout</a></button><br><br>
+	<table border="1" bgcolor="skyblue" >
+
 		<tr>
-			<th>id</th>
-			<th>first_name</th>
-			<th>last_name</th>
+			<th bgcolor="green">id</th>
+			<th bgcolor="green">username</th>
+			<th bgcolor="green">password</th>
+			<th colspan="5">operation</th>
 		</tr>
 		<?php
-		include("connection.php");
-    $disp=mysqli_query($conn,"SELECT * FROM customers");
-     while ($rows=mysqli_fetch_array($disp))
-  {
+		$conn=mysqli_connect('localhost','root','','viva');
+		$result=mysqli_query($conn,"SELECT * FROM client");
+		while ($row=mysqli_fetch_array($result)) {
+			
+		
 		?>
 		<tr>
-		<td><?php echo $rows['ID']?>;</td>
-		<td><?php echo $rows['first_name']?>;</td>
-		<td><?php echo $rows['last_name']?>;</td>
+			<td><?php echo $row['id'];?> </td>
+			<td><?php echo $row['username'];?> </td>
+			<td><?php echo $row['password'];?> </td>
+			<td><a href="delete.php?id=<?php echo $row['id'];?>">delete</td>
+				<td><a href="update.php?id=<?php echo $row['id'];?>">update</td>
+		</tr>
 		<?php
-  }
-  ?>
-</tr>
+	}
+		?>
 	</table>
 
 </body>
 </html>
-
